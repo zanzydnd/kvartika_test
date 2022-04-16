@@ -4,13 +4,12 @@ services:
 
   postgres:
     image: postgres:13-alpine
-    environment:
-      POSTGRES_DB: kvartirka
-      POSTGRES_USER: kvartirka
-      POSTGRES_PASSWORD: kvartika
+    env_file:
+      - ./src/.env.docker
     volumes:
       - kvartirka_single:/var/lib/postgresql/data
     ports:
       - 5432:5432
+
 volumes:
   kvartirka_single:

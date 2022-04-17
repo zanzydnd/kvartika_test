@@ -4,7 +4,7 @@ from django.db import models
 # Create your models here.
 
 class BaseModel(models.Model):
-    created_at = models.DateTimeField(auto_created=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -17,7 +17,7 @@ class Post(BaseModel):
 
 
 class Comment(BaseModel):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments",null=True)
     username = models.CharField(max_length=200)
     text = models.TextField()
-    answer_to = models.ForeignKey("self", on_delete=models.CASCADE, related_name='answers')
+    answer_to = models.ForeignKey("self", on_delete=models.CASCADE, related_name='answers', null=True)

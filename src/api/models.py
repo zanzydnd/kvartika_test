@@ -17,6 +17,7 @@ class Post(BaseModel):
 
 
 class Comment(BaseModel):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
     username = models.CharField(max_length=200)
     text = models.TextField()
     answer_to = models.ForeignKey("self", on_delete=models.CASCADE, related_name='answers')

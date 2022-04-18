@@ -10,9 +10,11 @@ services:
     env_file:
       - ./src/.env.docker
     ports:
-      - 8001:8000
+      - 8000:8000
     depends_on:
       - db
+    volumes:
+      - ./:/app
 
   db:
     container_name: kvartirka_db
@@ -23,7 +25,7 @@ services:
     env_file:
       - ./src/.env.docker
     ports:
-      - 5433:5432
+      - 5432:5432
 
 volumes:
   main_db:

@@ -14,4 +14,4 @@ EXPOSE 8000
 
 RUN python3 src/manage.py collectstatic --noinput
 
-CMD python3 src/manage.py migrate && gunicorn kvartika.wsgi --chdir src --bind 0.0.0.0 --preload --log-file -
+CMD python3 src/manage.py migrate && gunicorn kvartirka.wsgi --chdir src --bind 0.0.0.0 --preload --log-file -

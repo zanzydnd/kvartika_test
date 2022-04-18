@@ -1,14 +1,21 @@
 from django.urls import re_path, path
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
-from rest_framework import routers
+from rest_framework_nested import routers
 
-from api.views import PostViewSet
+from api.views import PostViewSet, CommentsNestedViewSet, CommentsViewSet, CommentsNestedInCommentsViewSet
 
 router = routers.SimpleRouter()
 
 router.register(r"post", PostViewSet, "simple")
 
+comments_nested_router = routers.NestedSimpleRouter(router, 'post', lookup='post')
+comments_nested_router.register('comments', CommentsNestedViewSet, basename='Comment')
+
+router.register(r"comments", CommentsViewSet, "simple")
+
+comments_nested_in_comments_router = routers.NestedSimpleRouter(router, 'comments', lookup='answer_to')
+comments_nested_in_comments_router.register("comments", CommentsNestedInCommentsViewSet, basename="Comment")
 schema_view = get_schema_view(
     openapi.Info(
         title="Referal API",
@@ -29,3 +36,5 @@ urlpatterns = [
 ]
 
 urlpatterns += router.urls
+urlpatterns += comments_nested_router.urls
+urlpatterns += comments_nested_in_comments_router.urls

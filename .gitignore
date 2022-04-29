@@ -77,8 +77,6 @@ target/
 # celery beat schedule file
 celerybeat-schedule
 
-# dotenv
-.env
 
 # virtualenv
 venv/
@@ -149,4 +147,3 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
-*.env.docker

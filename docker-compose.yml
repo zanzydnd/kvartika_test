@@ -6,7 +6,6 @@ services:
     container_name: kvartirka_web
     build:
       context: .
-      dockerfile: docker/python/Dockerfile
     env_file:
       - ./src/.env.docker
     ports:
